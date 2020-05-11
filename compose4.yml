@@ -1,0 +1,27 @@
+# Usecase-4:
+# Create a Docker Compose File for setting up the LAMP Architecture.
+# Solution:
+---
+
+version: '3'
+
+services:
+ mydb:
+  image: mysql
+  environment:
+   MYSQL_ROOT_PASSWROD: chaithanya
+
+ apache:
+  image: httpd
+  ports:
+   - 9999:80
+  links:
+   - mydb:mysql     
+
+ php:
+  image: php:7.2-apache
+  links:
+   - mydb:mysql
+   - apache:httpd  
+
+...
